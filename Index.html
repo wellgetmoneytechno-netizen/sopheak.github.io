@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ហាងមាស អនឡាញ - ទំនុកចិត្ត និងគុណភាព</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruuy+Pro:wght@300;400;700&family=Moul&display=swap" rel="stylesheet">
+    <style>
+        /* --- ការកំណត់ទូទៅ និង Gold Color Effects --- */
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa7c11;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            --dark-bg: #111111;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kantumruuy Pro', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- របារម៉ឺនុយ (Navigation) --- */
+        header {
+            background: rgba(17, 17, 17, 0.95);
+            border-bottom: 2px solid var(--gold-primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Moul', serif;
+            font-size: 22px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- បដា Free Delivery (ចែងចាំង) --- */
+        .delivery-banner {
+            background: var(--gold-gradient);
+            color: #000;
+            text-align: center;
+            padding: 8px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- ការគ្រប់គ្រងទំព័រ (Pages Setup) --- */
+        .page {
+            display: none;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ទំព័រទី១៖ ទំព័រដើម (Home Page) --- */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .hero h1 {
+            font-family: 'Moul', serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- ទំព័រទី២៖ ផលិតផល (Products Page) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            background: #252525;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            font-size: 50px;
+            /* អ្នកអាចជំនួសដោយរូបភាពពិតប្រាកដនៅទីនេះ */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card-price {
+            color: var(--gold-light);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            display: block;
+            background: var(--gold-gradient);
+            color: #000;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .free-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* --- ទំព័រទី៣៖ តម្លៃមាស (Gold Price Page) --- */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .price-table th {
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* --- ទំព័រទី៤៖ អំពីយើង (About Page) --- */
+        .about-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold-primary);
+            margin-top: 30px;
+        }
+
+        /* --- ទំព័រទី៥៖ ទំនាក់ទំនង (Contact Page) --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #252525;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--gold-primary);
+            outline: none;
+        }
+
+        .section-title {
+            font-family: 'Moul', serif;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* --- ផ្នែកខាងក្រោម (Footer) --- */
+        footer {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #222;
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="delivery-banner">
+        ✨ ការផ្តល់ជូនពិសេស៖ រាល់ការបញ្ជាទិញមាសពីហាងយើងខ្ញុំ នឹងទទួលបានការដឹកជញ្ជូនឥតគិតថ្លៃទូទាំងប្រទេស! (FREE DELIVERY) ✨
+    </div>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="switchPage('home')">មាសសុទ្ធកម្ពុជា</a>
+            <nav>
+                <a href="#" id="link-home" class="active" onclick="switchPage('home')">ទំព័រដើម</a>
+                <a href="#" id="link-products" onclick="switchPage('products')">ផលិតផល</a>
+                <a href="#" id="link-prices" onclick="switchPage('prices')">តម្លៃមាសថ្ងៃនេះ</a>
+                <a href="#" id="link-about" onclick="switchPage('about')">អំពីយើង</a>
+                <a href="#" id="link-contact" onclick="switchPage('contact')">ទំនាក់ទំនង</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="page-home" class="page active">
+        <section class="hero">
+            <h1>ស្វាគមន៍មកកាន់ ហាងមាសសុទ្ធកម្ពុជា អនឡាញ</h1>
+            <p>លក់គ្រឿងអលង្ការមាសទឹកដប់ មាសគីឡូ ដែលមានរចនាបថទាន់សម័យ និងប្រណិតបំផុត ធានាគុណភាព ១០០%</p>
+            <a href="#" class="cta-btn" onclick="switchPage('products')">ទស្សនាផលិតផលឥឡូវនេះ</a>
+        </section>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <h3 style="color: var(--gold-light);">ហេតុអ្វីជ្រើសរើសយើងខ្ញុំ?</h3>
+            <p style="color: var(--text-gray); max-width: 600px; margin: 10px auto;">យើងមានវិញ្ញាបនបត្របញ្ជាក់ត្រឹមត្រូវ ហ្វ្រីសេវាដឹកជញ្ជូនលឿនរហ័ស និងមានសុវត្ថិភាពខ្ពស់បំផុតជូនអតិថិជន។</p>
+        </div>
+    </div>
+
+    <div id="page-products" class="page">
+        <h2 class="section-title">គ្រឿងអលង្ការមាសទាន់សម័យ</h2>
+        <p>រាល់ការកម្មង់ទិញគ្រឿងអលង្ការមាសនឹងទទួលបានប្រអប់ថែមដ៏ស្អាត និងការដឹកជញ្ជូនហ្វ្រី។</p>
+        
+        <div class="grid">
+            <div class="card">
+                <span class="free-tag">Free Delivery</span>
+                <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-info">
+                    <h3 class="card-title">ចិញ្ចៀនមាសទម្រង់ផ្កាឈូក (មាស ២៤K)</h3>
+                    <div class="card-price">$450.00</div>
+                    <a href="https://t.me/your_telegram" class="btn-buy" target="_blank">ទិញឥឡូវនេះ</a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="free-tag">Free Delivery</span>
+                <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-info">
+                    <h3 class="card-title">ខ្សែករមាសម៉ូតទំនើបហុងកុង (មាស ១៨K)</h3>
+                    <div class="card-price">$1,250.00</div>
+                    <a href="https://t.me/your_telegram" class="btn-buy" target="_blank">ទិញឥឡូវនេះ</a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="free-tag">Free Delivery</span>
+                <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="card-info">
+                    <h3 class="card-title">កងដៃមាសឆ្លាក់ក្បាច់បុរាណខ្មែរ</h3>
+                    <div class="card-price">$890.00</div>
+                    <a href="https://t.me/your_telegram" class="btn-buy" target="_blank">ទិញឥឡូវនេះ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-prices" class="page">
+        <h2 class="section-title">បច្ចុប្បន្នភាពតម្លៃមាសថ្ងៃនេះ</h2>
+        <p>តម្លៃមាសអាចមានការប្រែប្រួលទៅតាមហាងឆេងទីផ្សារអន្តរជាតិ។</p>
+        
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>ប្រភេទមាស</th>
+                    <th>តម្លៃទិញចូល (១តំឡឹង)</th>
+                    <th>តម្លៃលក់ចេញ (១តំឡឹង)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>មាសគីឡូ (៩៩.៩៩%)</td>
+                    <td>$2,650.00</td>
+                    <td>$2,680.00</td>
+                </tr>
+                <tr>
+                    <td>មាសទឹកដប់ (៩៩%)</td>
+                    <td>$2,580.00</td>
+                    <td>$2,610.00</td>
+                </tr>
+                <tr>
+                    <td>មាសអុីតាលី (៧៥%)</td>
+                    <td>$1,950.00</td>
+                    <td>$1,990.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 15px; font-size: 12px; color: var(--text-gray);">* ចំណាំ៖ តម្លៃនេះសម្រាប់ជាព័ត៌មានពិគ្រោះ សម្រាប់ការទិញជាក់ស្តែងសូមទាក់ទងមកយើងខ្ញុំ។</p>
+    </div>
+
+    <div id="page-about" class="page">
+        <h2 class="section-title">អំពីហាងមាសយើងខ្ញុំ</h2>
+        <div class="about-content">
+            <h3 style="color: var(--gold-light); margin-bottom: 10px;">ប្រវត្តិ និងការប្តេជ្ញាចិត្ត</h3>
+            <p>ហាងមាសសុទ្ធកម្ពុជា ត្រូវបានបង្កើតឡើងក្នុងគោលបំណងផ្តល់ជូននូវគ្រឿងអលង្ការមាសពិតៗ ប្រកបដោយគុណភាព និងសោភ័ណភាពខ្ពស់ជូនដល់ប្រជាជនកម្ពុជា។ យើងខ្ញុំមានជាងមាសដែលមានបទពិសោធន៍រាប់សិបឆ្នាំក្នុងការច្នៃម៉ូតយ៉ាងផ្ចិតផ្ចង់។</p>
+            <br>
+            <h3 style="color: var(--gold-light); margin-bottom: 10px;">គោលការណ៍ដឹកជញ្ជូន</h3>
+            <p>ដើម្បីបង្កលក្ខណៈងាយស្រួលដល់អតិថិជនក្នុងការទិញទំនិញតាមអនឡាញ យើងខ្ញុំផ្តល់ជូននូវសេវាកម្មដឹកជញ្ជូនដោយឥតគិតថ្លៃ (Free Delivery) ២៥ ខេត្ត-ក្រុង ជាមួយនឹងប្រព័ន្ធវេចខ្ចប់មានសុវត្ថិភាព និងធានាការបាត់បង់ ១០០% ក្នុងអំឡុងពេលដឹកជញ្ជូន។</p>
+        </div>
+    </div>
+
+    <div id="page-contact" class="page">
+        <h2 class="section-title">ទាក់ទងមកយើងខ្ញុំ</h2>
+        
+        <div class="contact-container">
+            <div>
+                <h3 style="color: var(--gold-light); margin-bottom: 15px;">ព័ត៌មានទំនាក់ទំនង</h3>
+                <p>📍 <strong>ទីតាំង៖</strong> មហាវិថីព្រះសីហនុ, រាជធានីភ្នំពេញ, កម្ពុជា</p>
+                <p>📞 <strong>ទូរស័ព្ទ៖</strong> 012 345 678 / 098 765 432</p>
+                <p>💬 <strong>Telegram៖</strong> @your_telegram_username</p>
+                <p>📧 <strong>អ៊ីមែល៖</strong> info@goldcambodia.com</p>
+            </div>
+            
+            <div>
+                <h3 style="color: var(--gold-light); margin-bottom: 15px;">ផ្ញើសារមកយើងខ្ញុំ</h3>
+                <form onsubmit="alert('សាររបស់លោកអ្នកត្រូវបានផ្ញើ! យើងខ្ញុំនឹងទាក់ទងទៅវិញឆាប់ៗ។'); return false;">
+                    <div class="form-group">
+                        <label>ឈ្មោះរបស់អ្នក</label>
+                        <input type="text" required placeholder="បញ្ចូលឈ្មោះ">
+                    </div>
+                    <div class="form-group">
+                        <label>លេខទូរស័ព្ទ</label>
+                        <input type="tel" required placeholder="បញ្ចូលលេខទូរស័ព្ទ">
+                    </div>
+                    <div class="form-group">
+                        <label>សារ ឬសំណួរ</label>
+                        <textarea rows="4" required placeholder="តើលោកអ្នកចង់សួរអ្វីខ្លះ?..."></textarea>
+                    </div>
+                    <button type="submit" class="cta-btn" style="border: none; cursor: pointer; width: 100%;">ផ្ញើសារ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 រក្សាសិទ្ធិគ្រប់យ៉ាងដោយ ហាងមាសសុទ្ធកម្ពុជា អនឡាញ</p>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            // លាក់គ្រប់ទំព័រទាំងអស់
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // ដក Active class ពីគ្រប់ Links លើ Menu
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // បង្ហាញទំព័រដែលបានជ្រើសរើស
+            document.getElementById('page-' + pageId).classList.add('active');
+
+            // បន្ថែម Active class ទៅលើ Link ដែលបានចុច
+            document.getElementById('link-' + pageId).classList.add('active');
+
+            // រំកិលអេក្រង់ទៅលើគេវិញ
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
